@@ -1,128 +1,97 @@
 /*
-Question: Where are the top_paying data analyst and related jobs considering working from home?
+Question: Where are the top 10 paying remote data analyst jobs on LinkedIn ?
 - Identify the top 10 highest-paying Data Analyst roles and related that are available remotely
-- Focuses on job postings with specified salaries (remove nulls)
+- Focuses on job postings with specified salaries (remove nulls) and specific site (LinkedIn)
 - BONUS: Include company names of top 10 roles
 - Why? Highlight the top-paying opportunities for Data Analysts, offering insights into employment options and location flexibility.
 */
 
 SELECT	
-	job_id,
-	job_title,
-	job_location,
-	job_schedule_type,
-	salary_year_avg,
-	job_posted_date,
-    name AS company_name
+    job_title AS Title,
+    company_dim.name AS Company_Name,
+    job_posted_date::DATE,
+    ROUND(salary_year_avg, 0) AS Salary_yearly
 FROM
     job_postings_fact
 LEFT JOIN company_dim ON job_postings_fact.company_id = company_dim.company_id
 WHERE
     job_title_short = 'Data Analyst' AND 
-    job_location = 'Anywhere' AND 
+    job_work_from_home = true and 
+    job_via = 'via LinkedIn' and
     salary_year_avg IS NOT NULL
 ORDER BY
-    salary_year_avg DESC
+    salary_year_avg DESC,
+    job_id
 LIMIT 10;
 
 /*
-Here's the breakdown of the top data analyst jobs in 2023:
-Wide Salary Range: Top 10 paying data analyst roles span from $184,000 to $650,000, indicating significant salary potential in the field.
-Diverse Employers: Companies like SmartAsset, Meta, and AT&T are among those offering high salaries, showing a broad interest across different industries.
-Job Title Variety: There's a high diversity in job titles, from Data Analyst to Director of Analytics, reflecting varied roles and specializations within data analytics.
+Here's the breakdown of the top remote data analyst jobs in 2023:
+Wide Salary Range: Top 10 remote data analyst roles on LinkedIn span from $140,500 to $336,500, indicating significant salary potential in the field, especially in senior positions.
+Diverse Industries: Companies like SmartAsset, Meta, and AT&T are among those offering high salaries, showing a broad interest across different industries.
+Career Progression: There's a high diversity in job titles, from Data Analyst to Director of Analytics, reflecting varied roles and specializations within data analytics.
 
 RESULTS
 =======
 [
   {
-    "job_id": 226942,
-    "job_title": "Data Analyst",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "650000.0",
-    "job_posted_date": "2023-02-20 15:13:33",
-    "company_name": "Mantys"
+    "title": "Director of Analytics",
+    "company_name": "Meta",
+    "job_posted_date": "2023-08-23",
+    "salary_yearly": "336500"
   },
   {
-    "job_id": 547382,
-    "job_title": "Director of Analytics",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "336500.0",
-    "job_posted_date": "2023-08-23 12:04:42",
-    "company_name": "Meta"
+    "title": "Principal Data Analyst, AV Performance Analysis",
+    "company_name": "Motional",
+    "job_posted_date": "2023-01-05",
+    "salary_yearly": "189000"
   },
   {
-    "job_id": 552322,
-    "job_title": "Associate Director- Data Insights",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "255829.5",
-    "job_posted_date": "2023-06-18 16:03:12",
-    "company_name": "AT&T"
+    "title": "Azure Data Python Consultant - contract to HIRE - Citizen or Perm...",
+    "company_name": "Kelly Science, Engineering, Technology & Telecom",
+    "job_posted_date": "2023-01-23",
+    "salary_yearly": "170000"
   },
   {
-    "job_id": 99305,
-    "job_title": "Data Analyst, Marketing",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "232423.0",
-    "job_posted_date": "2023-12-05 20:00:40",
-    "company_name": "Pinterest Job Advertisements"
+    "title": "Data Analyst",
+    "company_name": "Plexus Resource Solutions",
+    "job_posted_date": "2023-12-08",
+    "salary_yearly": "165000"
   },
   {
-    "job_id": 1021647,
-    "job_title": "Data Analyst (Hybrid/Remote)",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "217000.0",
-    "job_posted_date": "2023-01-17 00:17:23",
-    "company_name": "Uclahealthcareers"
+    "title": "Principal Data Analyst",
+    "company_name": "Realtime Recruitment",
+    "job_posted_date": "2023-02-02",
+    "salary_yearly": "160000"
   },
   {
-    "job_id": 168310,
-    "job_title": "Principal Data Analyst (Remote)",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "205000.0",
-    "job_posted_date": "2023-08-09 11:00:01",
-    "company_name": "SmartAsset"
+    "title": "SQL DEVELOPER / DATA ANALYST (Insurance industry Experience) ...",
+    "company_name": "Robert Half",
+    "job_posted_date": "2023-01-30",
+    "salary_yearly": "160000"
   },
   {
-    "job_id": 731368,
-    "job_title": "Director, Data Analyst - HYBRID",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "189309.0",
-    "job_posted_date": "2023-12-07 15:00:13",
-    "company_name": "Inclusively"
+    "title": "Lead Data Analyst - Retirement Product Management",
+    "company_name": "Edward Jones",
+    "job_posted_date": "2023-05-09",
+    "salary_yearly": "148239"
   },
   {
-    "job_id": 310660,
-    "job_title": "Principal Data Analyst, AV Performance Analysis",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "189000.0",
-    "job_posted_date": "2023-01-05 00:00:25",
-    "company_name": "Motional"
+    "title": "Data Analyst - up to 160K+",
+    "company_name": "Hire With Jarvis",
+    "job_posted_date": "2023-04-18",
+    "salary_yearly": "145000"
   },
   {
-    "job_id": 1749593,
-    "job_title": "Principal Data Analyst",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "186000.0",
-    "job_posted_date": "2023-07-11 16:00:05",
-    "company_name": "SmartAsset"
+    "title": "Lead Data Analyst",
+    "company_name": "Edward Jones",
+    "job_posted_date": "2023-01-28",
+    "salary_yearly": "144482"
   },
   {
-    "job_id": 387860,
-    "job_title": "ERM Data Analyst",
-    "job_location": "Anywhere",
-    "job_schedule_type": "Full-time",
-    "salary_year_avg": "184000.0",
-    "job_posted_date": "2023-06-09 08:01:04",
-    "company_name": "Get It Recruit - Information Technology"
+    "title": "People Data Analyst",
+    "company_name": "Insight Global",
+    "job_posted_date": "2023-07-31",
+    "salary_yearly": "140500"
   }
 ]
 */
