@@ -1,3 +1,4 @@
+-- Active: 1751919600063@@127.0.0.1@5432@sql_course
 # About the Author
 Hello everyone 👋, My name is **Harris Tosuk**, I'm a college student who studying in business with a background in IT. I'm excited to share my first Data Analysis project. I've always believed that having both technical skills is a powerful combination. And i hope this project may inspires some of you who are looking to try something new or want to blend your skills in a similar way.✨
 
@@ -27,34 +28,86 @@ For my deep dive into the data analyst job market, I managed to use several key 
 
 # The Analysis
 Each query for this project aimed at investigating specific aspects of the data analyst job market. Here’s how I approached each question:
-### 1. Top Paying Data Analyst Jobs
-To identify the highest-paying roles, I filtered data analyst positions by average yearly salary and location, focusing on remote jobs. This query highlights the high-paying opportunities in the field.
+### 1. Top Paying Remote Data Analyst Jobs
+To identify the highest-paying remote roles, I filtered data analyst positions by average salary (yearly) via LinkedIn, focusing on remote jobs and available.
+
+
 ```sql 
 SELECT	
-	job_id,
-	job_title,
-	job_location,
-	job_schedule_type,
-	salary_year_avg,
-	job_posted_date,
-    name AS company_name
+    job_title AS Title,
+    company_dim.name AS Company_Name,
+    job_posted_date::DATE,
+    ROUND(salary_year_avg, 0) AS Salary_yearly
 FROM
     job_postings_fact
 LEFT JOIN company_dim ON job_postings_fact.company_id = company_dim.company_id
 WHERE
     job_title_short = 'Data Analyst' AND 
-    job_location = 'Anywhere' AND 
+    job_work_from_home = true and 
+    job_via = 'via LinkedIn' and
     salary_year_avg IS NOT NULL
 ORDER BY
-    salary_year_avg DESC
+    salary_year_avg DESC,
+    job_id
 LIMIT 10;
 ```
-Here's the breakdown of the top data analyst jobs in 2023:
-- **Wide Salary Range :** Top 10 paying data analyst roles span from $184,000 to $650,000, indicating significant salary potential in the field.
-- **Diverse Employees :** Companies like SmartAsset, Meta, and AT&T are among those offering high salaries, showing a broad interest across different industries.
-- **Job Title Variety :**  The wide range of job titles, from Data Analyst to Director of Analytics, reflects varied roles and specializations within the field.
 
-![Top Paying Roles](assets/1_top_paying_jobs.jpg)
+Here's the breakdown of the top remote data analyst jobs in 2023:
 
+- **Wide Salary Range :** Top 10 remote data analyst roles on LinkedIn span from $140,500 to $336,500, indicating significant salary potential in the field, especially in senior positions.
+- **Diverse Industries :** High-paying roles are offered by a variety of companies, including big tech (Meta), automotive tech (Motional), financial services (Edward Jones). The results show that data analyst skills are highly valued across different sectors.
+- **Career Progression :**  The job titles in the top results, indicate that higher salaries are strongly correlated with experience and leadership responsibilities.
+
+![Top Paying Roles](assets/1_top_paying_remote_jobs.jpg)
+
+*<p align="center">Bar graph showing the salary for the top 10 salaries for data analysts</p>*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 2. In-Demand Skills for Data Analyst 
+To identify the skills most frequently requested in job postings, directing focus to areas with high demand.
+
+``` sql 
+SELECT 
+    skills,
+    COUNT(skills_job_dim.job_id) AS demand_count
+FROM job_postings_fact
+INNER JOIN skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+WHERE
+    job_title_short in ('Data Analyst','Data Scientist')
+    AND job_work_from_home = True 
+GROUP BY
+    skills
+ORDER BY
+    demand_count DESC
+LIMIT 5;
+```
 # What I Learned
 # Conclusions
