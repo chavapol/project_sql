@@ -1,4 +1,3 @@
--- Active: 1751919600063@@127.0.0.1@5432@sql_course
 # About the Author
 Hello everyone 👋, My name is **Harris Tosuk**, I'm a college student who studying in business with a background in IT. I'm excited to share my first Data Analysis project. I've always believed that having both technical skills is a powerful combination. And i hope this project may inspires some of you who are looking to try something new or want to blend your skills in a similar way.✨
 
