@@ -35,9 +35,10 @@ To identify the highest-paying remote roles, I filtered data analyst positions b
 -- Question: What are the top_paying data analyst jobs on LinkedIn?
 
 SELECT	
-    job_title AS Title,
     company_dim.name AS Company_Name,
+    job_title_short AS Title,
     job_posted_date::DATE,
+    job_work_from_home AS Remote, 
     ROUND(salary_year_avg, 0) AS Salary_yearly
 FROM
     job_postings_fact
@@ -54,18 +55,18 @@ LIMIT 10;
 ```
 
 ### 💡 Result Table
-| Title | Company | Date Posted | Yearly Salary ($) |
-| ------ | -------- | ------------ | ---------------- |
-| Director of Analytics | Meta | 2023-08-23 | 336,500 |
-| Principal Data Analyst, AV Performance Analysis | Motional | 2023-01-05 | 189,000 |
-| Azure Data Python Consultant - contract to HIRE | Kelly Science, Engineering, Technology & Telecom | 2023-01-23 | 170,000 |
-| Data Analyst | Plexus Resource Solutions | 2023-12-08 | 165,000 |
-| Principal Data Analyst | Realtime Recruitment | 2023-02-02 | 160,000 |
-| SQL Developer / Data Analyst (Insurance Industry) | Robert Half | 2023-01-30 | 160,000 |
-| Lead Data Analyst - Retirement Product Management | Edward Jones | 2023-05-09 | 148,239 |
-| Data Analyst - up to 160K+ | Hire With Jarvis | 2023-04-18 | 145,000 |
-| Lead Data Analyst | Edward Jones | 2023-01-28 | 144,482 |
-| People Data Analyst | Insight Global | 2023-07-31 | 140,500 |
+| Company | Title | Date Posted | Remote | Yearly Salary ($) |
+| -------- | ------ | ------------ | :------: | ----------------: |
+| Meta | Data Analyst | 2023-08-23 | true | 336,500 |
+| Motional | Data Analyst | 2023-01-05 | true | 189,000 |
+| Kelly Science, Engineering, Technology & Telecom | Data Analyst | 2023-01-23 | true | 170,000 |
+| Plexus Resource Solutions | Data Analyst | 2023-12-08 | true | 165,000 |
+| Realtime Recruitment | Data Analyst | 2023-02-02 | true | 160,000 |
+| Robert Half | Data Analyst | 2023-01-30 | true | 160,000 |
+| Edward Jones | Data Analyst | 2023-05-09 | true | 148,239 |
+| Hire With Jarvis | Data Analyst | 2023-04-18 | true | 145,000 |
+| Edward Jones | Data Analyst | 2023-01-28 | true | 144,482 |
+| Insight Global | Data Analyst | 2023-07-31 | true | 140,500 |
 
 
 Here's the breakdown of the top remote data analyst jobs in 2023:
