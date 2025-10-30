@@ -54,7 +54,7 @@ ORDER BY
 LIMIT 10;
 ```
 
-### 💡 Result Table
+## 📋 Result Table
 | Company | Title | Date Posted | Remote | Yearly Salary ($) |
 | -------- | ------ | ------------ | :------: | ----------------: |
 | Meta | Data Analyst | 2023-08-23 | true | 336,500 |
@@ -69,13 +69,10 @@ LIMIT 10;
 | Insight Global | Data Analyst | 2023-07-31 | true | 140,500 |
 
 
-Here's the breakdown of the top remote data analyst jobs in 2023:
-
-- **Wide Salary Range :** Top 10 remote data analyst roles on LinkedIn span from $140,500 to $336,500, indicating significant salary potential in the field, especially in senior positions.
-- **Diverse Industries :** High-paying roles are offered by a variety of companies, including big tech (Meta), automotive tech (Motional), financial services (Edward Jones). The results show that data analyst skills are highly valued across different sectors.
-- **Career Progression :**  The job titles in the top results, indicate that higher salaries are strongly correlated with experience and leadership responsibilities.
-
-
+### 💡 Here's the breakdown:
+* **Wide Range Salary:** The top remote **data analyst** salaries range from **$140,500 to $336,500**, showing strong earning opportunities for experienced analysts.
+* **Top hiring companies:** Top employers include **Meta, Motional, and Edward Jones**, reflecting demand across tech and finance.
+* **Role Consistency:** All positions are **Data Analyst** roles, with pay varying by industry and seniority.
 
 
 
